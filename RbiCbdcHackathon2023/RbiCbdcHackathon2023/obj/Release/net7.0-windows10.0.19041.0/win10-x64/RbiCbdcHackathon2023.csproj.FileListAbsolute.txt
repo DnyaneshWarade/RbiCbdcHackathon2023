@@ -1,0 +1,12 @@
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\RbiCbdcHackathon2023.csproj.AssemblyReference.cache
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\mauiimage.inputs
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\mauifont.inputs
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\mauisplash.inputs
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\mauimanifest.stamp
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.g.i.cs
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.g.cs
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\XamlTypeInfo.g.cs
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xaml
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\Platforms\Windows\App.xbf
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\XamlSaveStateFile.xml
+C:\MyWork\Personal\RbiCbdcHackathon2023\RbiCbdcHackathon2023\RbiCbdcHackathon2023\obj\Release\net7.0-windows10.0.19041.0\win10-x64\RbiCbdcHackathon2023.GeneratedMSBuildEditorConfig.editorconfig

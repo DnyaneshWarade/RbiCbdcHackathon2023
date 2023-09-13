@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="RbiCbdcHackathon2023.Pages.Popups.SendMoneyPopup"
+               xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+               xmlns:viewmodel="clr-namespace:RbiCbdcHackathon2023.ViewModels"
+               x:DataType="viewmodel:SendMoneyViewModel">
+    <VerticalStackLayout Spacing="10" Padding="20" WidthRequest="250" BackgroundColor="White">
+        <Label Text="Send Money"
+               FontSize="20"
+               HorizontalOptions="Center" />
+        <Entry Placeholder="Enter receiver mobile no"
+               FontSize="18"
+               Keyboard="Numeric"
+               Text="{Binding ReceiverMobileNo}"
+               Margin="0,20,0,0"/>
+        <Entry Placeholder="Enter amount"
+               FontSize="18"
+               Keyboard="Numeric"
+               Text="{Binding Amount}"/>
+        <Entry Placeholder="Enter pin"
+               FontSize="18"
+               Keyboard="Numeric"
+               Text="{Binding Pin}"
+               Margin="0,0,0,10"/>
+        <Label Text="{Binding Error}"
+               TextColor="Red"/>
+        <Button Text="Proceed"
+                HorizontalOptions="Center"
+                FontSize="18"
+                Command="{Binding SendMoneyCommand}"/>
+    </VerticalStackLayout>
+</toolkit:Popup>
