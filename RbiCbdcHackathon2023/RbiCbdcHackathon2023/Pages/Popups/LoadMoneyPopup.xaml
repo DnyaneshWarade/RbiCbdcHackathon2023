@@ -4,16 +4,38 @@
                x:Class="RbiCbdcHackathon2023.Pages.Popups.LoadMoneyPopup"
                xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
                xmlns:viewmodel="clr-namespace:RbiCbdcHackathon2023.ViewModels"
-               x:DataType="viewmodel:LoadMoneyViewModel">
-    <VerticalStackLayout Spacing="10" Padding="20" WidthRequest="200" BackgroundColor="White">
+               x:DataType="viewmodel:LoadMoneyViewModel"
+               xmlns:modal="clr-namespace:RbiCbdcHackathon2023.Database.Models">
+    <VerticalStackLayout Spacing="10" Padding="20" WidthRequest="350" BackgroundColor="White">
         <Label Text="Load Money"
                FontSize="20"
                HorizontalOptions="Center" />
-        <Entry Placeholder="Enter amount"
+        <Entry Placeholder="Choose notes"
                FontSize="18"
                Keyboard="Numeric"
                Text="{Binding Amount}"
-               Margin="20,0,0,10"/>
+               Margin="20,20,0,10"
+               HorizontalTextAlignment="Center"
+               IsEnabled="False"/>
+        <CollectionView x:Name="horizontalCollectionView" ItemsSource="{Binding Denominations}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type modal:Denomination}">
+                    <StackLayout HorizontalOptions="Center">
+                            <Label Text="{Binding Source={x:Reference _stepper}, Path=Value, StringFormat='{0:F0}'}"
+                                   HorizontalOptions="Center" FontSize="24"/>
+                            <Stepper x:Name="_stepper"
+                                     Increment="1"
+                                     Value="{Binding Quantity}"
+                                     WidthRequest="70" 
+                                     ValueChanged="OnStepperValueChanged"/>
+                        <Image Source="{Binding ImageName}" HeightRequest="160" WidthRequest="80"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
         <Label Text="{Binding Error}"
                TextColor="Red"/>
         <Button Text="Proceed"

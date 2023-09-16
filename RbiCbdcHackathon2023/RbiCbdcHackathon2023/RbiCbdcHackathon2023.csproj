@@ -82,6 +82,13 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\banner.jpg" />
 	  <None Remove="Resources\Images\eRupee.png" />
+	  <None Remove="Resources\Images\fifty.jpg" />
+	  <None Remove="Resources\Images\fivehundred.jpg" />
+	  <None Remove="Resources\Images\hundred.jpg" />
+	  <None Remove="Resources\Images\ten.jpg" />
+	  <None Remove="Resources\Images\twenty.jpg" />
+	  <None Remove="Resources\Images\twohundred.jpg" />
+	  <None Remove="Resources\Images\twothousand.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -93,6 +100,7 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
 	</ItemGroup>

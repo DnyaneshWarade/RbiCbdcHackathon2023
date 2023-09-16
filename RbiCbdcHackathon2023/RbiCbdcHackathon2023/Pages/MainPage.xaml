@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <converter:EpochToDateConverter x:Key="EpochToDateConverter" />
             <converter:StringToColorConverter x:Key="StringToColorConverter" />
+            <converter:StepperMaxValueToBoolConverter x:Key="StepperMaxValueToBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid>
@@ -36,7 +37,7 @@
                                    HorizontalOptions="Center"
                                    Grid.Row="1">
                 <Button Text="Load Money" Clicked="LoadMoney_Clicked"/>
-                <Button Text="Send Money" Clicked="SendMoney_Clicked"/>
+                <Button Text="Send Money" Command="{Binding SendMoneyCommand}"/>
                 <Button Text="Unload Money" Command="{Binding ClearDataCommand}"/>
             </HorizontalStackLayout>
             <Label Text="Transaction history" Padding="10,0"

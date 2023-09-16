@@ -1,5 +1,12 @@
 ﻿obj\Debug\net7.0-android33.0\resizetizer\r\drawable\banner.jpg
 obj\Debug\net7.0-android33.0\resizetizer\r\drawable\erupee.png
+obj\Debug\net7.0-android33.0\resizetizer\r\drawable\fifty.jpg
+obj\Debug\net7.0-android33.0\resizetizer\r\drawable\fivehundred.jpg
+obj\Debug\net7.0-android33.0\resizetizer\r\drawable\hundred.jpg
+obj\Debug\net7.0-android33.0\resizetizer\r\drawable\ten.jpg
+obj\Debug\net7.0-android33.0\resizetizer\r\drawable\twenty.jpg
+obj\Debug\net7.0-android33.0\resizetizer\r\drawable\twohundred.jpg
+obj\Debug\net7.0-android33.0\resizetizer\r\drawable\twothousand.jpg
 obj\Debug\net7.0-android33.0\resizetizer\r\drawable-hdpi\dotnet_bot.png
 obj\Debug\net7.0-android33.0\resizetizer\r\drawable-hdpi\splash.png
 obj\Debug\net7.0-android33.0\resizetizer\r\drawable-mdpi\dotnet_bot.png

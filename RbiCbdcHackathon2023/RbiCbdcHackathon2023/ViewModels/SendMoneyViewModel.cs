@@ -1,18 +1,22 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using RbiCbdcHackathon2023.Helper;
-using RbiCbdcHackathon2023.Pages;
 using RbiCbdcHackathon2023.Database.Models;
+using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 
 namespace RbiCbdcHackathon2023.ViewModels
 {
     public partial class SendMoneyViewModel : ObservableObject
     {
         [ObservableProperty]
+        ObservableCollection<Denomination> denominations = new ObservableCollection<Denomination>();
+
+        [ObservableProperty]
         string receiverMobileNo;
 
         [ObservableProperty]
-        string amount;
+        int amount;
 
         [ObservableProperty]
         string pin;
@@ -21,6 +25,23 @@ namespace RbiCbdcHackathon2023.ViewModels
         string error;
 
         public event EventHandler ClosePopup;
+
+        private Collection<Denomination> _userAvailableDenominations;
+        public SendMoneyViewModel()
+        {
+            Init();
+        }
+
+        async Task Init()
+        {
+            var moneyAvailableJson = await SecureStorage.Default.GetAsync("denominations");
+            _userAvailableDenominations = JsonConvert.DeserializeObject<Collection<Denomination>>(moneyAvailableJson);
+            foreach (var item in _userAvailableDenominations)
+            {
+                item.MaxLimit = item.MaxLimit != 0 ? item.MaxLimit : 100;
+                Denominations.Add(item);
+            }
+        }
 
         [RelayCommand]
         async Task SendMoney()
@@ -31,17 +52,27 @@ namespace RbiCbdcHackathon2023.ViewModels
                 Error = "Enter valid receiver number";
                 return;
             }
-            double amt;
-            if(!double.TryParse(Amount, out amt) || amt < 0)
+            if(Amount < 0)
             {
                 Error = "Enter valid amount";
                 return;
             }
 
             var reqId = CommonFunctions.GetEpochTime();
-            var message = "{" + $"\"requestId\": \"{reqId}\",\"action\":\"sendMoney\",\"amount\": {amt}, \"from\": {CommonFunctions.LoggedInMobileNo}, \"pin\": {Pin}, \"to\": {ReceiverMobileNo}, \"desc\":\"Send money\"" + "}";
+            var message = "{" + $"\"requestId\": \"{reqId}\",\"action\":\"sendMoney\",\"amount\": {Amount}, \"from\": {CommonFunctions.LoggedInMobileNo}, \"pin\": {Pin}, \"to\": {ReceiverMobileNo}, \"desc\":\"Send money\"" + "}";
             CommonFunctions.SendEncryptedSms(ReceiverMobileNo, message);
-            Transaction newItem = new Transaction { ReqId = reqId.ToString(), Amount = amt, From = CommonFunctions.LoggedInMobileNo, To = ReceiverMobileNo, Status = "In Process", Desc = "Send money" };
+
+            foreach (var item in Denominations)
+            {
+                var note = _userAvailableDenominations.FirstOrDefault(d => d.Name == item.Name);
+                if (note != null)
+                {
+                    note.MaxLimit -= item.Quantity;
+                    note.Quantity = 0;
+                }
+            }
+            await SecureStorage.Default.SetAsync("denominations", JsonConvert.SerializeObject(_userAvailableDenominations));
+            Transaction newItem = new Transaction { ReqId = reqId.ToString(), Amount = Amount, From = CommonFunctions.LoggedInMobileNo, To = ReceiverMobileNo, Status = "In Process", Desc = "Send money" };
 
             var navigationParameter = new Dictionary<string, object>
                                             {
@@ -49,6 +80,15 @@ namespace RbiCbdcHackathon2023.ViewModels
                                             };
             await Shell.Current.GoToAsync("..", true, navigationParameter);
             ClosePopup?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void OnStepperValueCahnged()
+        {
+            Amount = 0;
+            foreach (var item in Denominations)
+            {
+                Amount += item.Quantity * item.Value;
+            }
         }
     }
 }

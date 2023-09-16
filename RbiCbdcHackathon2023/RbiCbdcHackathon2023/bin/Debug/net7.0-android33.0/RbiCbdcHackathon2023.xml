@@ -8,6 +8,9 @@
             <inheritdoc/>
             <inheritdoc/>
         </member>
+        <member name="P:RbiCbdcHackathon2023.ViewModels.LoadMoneyViewModel.Denominations">
+            <inheritdoc cref="F:RbiCbdcHackathon2023.ViewModels.LoadMoneyViewModel.denominations"/>
+        </member>
         <member name="P:RbiCbdcHackathon2023.ViewModels.LoadMoneyViewModel.Amount">
             <inheritdoc cref="F:RbiCbdcHackathon2023.ViewModels.LoadMoneyViewModel.amount"/>
         </member>
@@ -59,6 +62,7 @@
         <member name="T:RbiCbdcHackathon2023.ViewModels.MainViewModel">
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:RbiCbdcHackathon2023.ViewModels.MainViewModel.Transactions">
             <inheritdoc cref="F:RbiCbdcHackathon2023.ViewModels.MainViewModel.transactions"/>
@@ -77,6 +81,12 @@
         </member>
         <member name="P:RbiCbdcHackathon2023.ViewModels.MainViewModel.ClearDataCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:RbiCbdcHackathon2023.ViewModels.MainViewModel.ClearData"/>.</summary>
+        </member>
+        <member name="F:RbiCbdcHackathon2023.ViewModels.MainViewModel.sendMoneyCommand">
+            <summary>The backing field for <see cref="P:RbiCbdcHackathon2023.ViewModels.MainViewModel.SendMoneyCommand"/>.</summary>
+        </member>
+        <member name="P:RbiCbdcHackathon2023.ViewModels.MainViewModel.SendMoneyCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:RbiCbdcHackathon2023.ViewModels.MainViewModel.SendMoney"/>.</summary>
         </member>
         <member name="T:RbiCbdcHackathon2023.ViewModels.RegisterViewModel">
             <inheritdoc/>
@@ -119,6 +129,9 @@
         <member name="T:RbiCbdcHackathon2023.ViewModels.SendMoneyViewModel">
             <inheritdoc/>
             <inheritdoc/>
+        </member>
+        <member name="P:RbiCbdcHackathon2023.ViewModels.SendMoneyViewModel.Denominations">
+            <inheritdoc cref="F:RbiCbdcHackathon2023.ViewModels.SendMoneyViewModel.denominations"/>
         </member>
         <member name="P:RbiCbdcHackathon2023.ViewModels.SendMoneyViewModel.ReceiverMobileNo">
             <inheritdoc cref="F:RbiCbdcHackathon2023.ViewModels.SendMoneyViewModel.receiverMobileNo"/>
@@ -243,6 +256,9 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Denominations">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Denominations" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Amount">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Amount" generated properties.</summary>
         </member>
@@ -284,6 +300,9 @@
             A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Denominations">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Denominations" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Amount">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Amount" generated properties.</summary>

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using RbiCbdcHackathon2023.Database;
 using RbiCbdcHackathon2023.Helper.ValueConverter;
 using RbiCbdcHackathon2023.Pages;
+using RbiCbdcHackathon2023.Pages.Popups;
 using RbiCbdcHackathon2023.Services;
 using RbiCbdcHackathon2023.ViewModels;
 
@@ -34,6 +35,7 @@ namespace RbiCbdcHackathon2023
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<LoadMoneyViewModel>();
             builder.Services.AddSingleton<DatabaseContext>();
+            builder.Services.AddTransient<SendMoneyPopup>();
             //Application.Current.Resources.Add("EpochToDateConverter", new EpochToDateConverter());
             return builder.Build();
         }

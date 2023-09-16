@@ -16,10 +16,5 @@ namespace RbiCbdcHackathon2023.Pages
         {
             this.ShowPopup(new LoadMoneyPopup());
         }
-
-        private void SendMoney_Clicked(object sender, EventArgs e)
-        {
-            this.ShowPopup(new SendMoneyPopup());
-        }
     }
 }

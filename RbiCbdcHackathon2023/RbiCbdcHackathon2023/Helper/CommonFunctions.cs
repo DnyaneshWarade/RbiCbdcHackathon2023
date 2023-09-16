@@ -1,4 +1,5 @@
-﻿using RbiCbdcHackathon2023.Services.PartialMethods;
+﻿using RbiCbdcHackathon2023.Database.Models;
+using RbiCbdcHackathon2023.Services.PartialMethods;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,17 +14,19 @@ namespace RbiCbdcHackathon2023.Helper
         static private ICryptoTransform encyptCryptoTransform;
         static private ICryptoTransform decyptCryptoTransform;
         static private SmsService smsService;
-        static public string LoggedInMobileNo {get; set;}
+        static public string LoggedInMobileNo { get; set; }
         static public string LoggedInMobilePin { get; set; }
 
         public static bool ValidatePhoneNumber(string mobileNo)
         {
+            if (string.IsNullOrEmpty(mobileNo)) { return false; }
             return Regex.IsMatch(mobileNo, mobileNoPattern);
         }
 
         private static ICryptoTransform GetEncryptor()
         {
-            try {
+            try
+            {
                 if (encyptCryptoTransform != null)
                 {
                     return encyptCryptoTransform;
@@ -37,8 +40,10 @@ namespace RbiCbdcHackathon2023.Helper
                 aesAlg.Mode = CipherMode.ECB;
                 aesAlg.Padding = PaddingMode.PKCS7;
                 encyptCryptoTransform = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
-                return encyptCryptoTransform; 
-            } catch { 
+                return encyptCryptoTransform;
+            }
+            catch
+            {
                 return null;
             }
         }
@@ -74,7 +79,8 @@ namespace RbiCbdcHackathon2023.Helper
             {
                 return string.Empty;
             }
-            try {
+            try
+            {
                 // get encryptor first
                 ICryptoTransform encryptor = GetEncryptor();
                 if (encryptor == null)
@@ -109,9 +115,10 @@ namespace RbiCbdcHackathon2023.Helper
                 byte[] decryptedBytes = decryptor.TransformFinalBlock(encryptedBytes, 0, encryptedBytes.Length);
                 return Encoding.UTF8.GetString(decryptedBytes);
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.ToString());
-                return string.Empty; 
+                return string.Empty;
             }
         }
 
@@ -142,7 +149,8 @@ namespace RbiCbdcHackathon2023.Helper
                 }
                 GetSmsService().Send("+91" + mobileNo, message);
             }
-            catch(Exception ex) { 
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
             }
         }
@@ -170,6 +178,19 @@ namespace RbiCbdcHackathon2023.Helper
         public static long GetEpochTime()
         {
             return (long)(DateTimeOffset.UtcNow - DateTimeOffset.UnixEpoch).TotalSeconds;
+        }
+
+        public static ICollection<Denomination> GetDenominations()
+        {
+            return new List<Denomination> { 
+                new Denomination("Ten", "ten.jpg", 10),
+                new Denomination("Twenty", "twenty.jpg", 20),
+                new Denomination("Fifty", "fifty.jpg", 50),
+                new Denomination("Hundred", "hundred.jpg", 100),
+                new Denomination("TwoHundred", "twohundred.jpg", 200),
+                new Denomination("FiveHundred", "fivehundred.jpg", 500),
+                new Denomination("TwoThousand", "twothousand.jpg", 2000),
+            };
         }
     }
 }

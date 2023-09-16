@@ -11,7 +11,7 @@
   <uses-permission android:name="android.permission.READ_SMS" />
   <uses-permission android:name="android.permission.RECEIVE_SMS" />
   <uses-permission android:name="android.permission.SEND_SMS" />
-  <application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:name="crc64341e69d0b1f2f946.MainApplication" android:label="RbiCbdcHackathon2023" android:debuggable="true" android:extractNativeLibs="true">
+  <application android:allowBackup="true" android:supportsRtl="true" android:name="crc64341e69d0b1f2f946.MainApplication" android:label="RbiCbdcHackathon2023" android:debuggable="true" android:extractNativeLibs="true">
     <activity android:configChanges="density|orientation|smallestScreenSize|screenLayout|screenSize|uiMode" android:theme="@style/Maui.SplashTheme" android:name="crc64341e69d0b1f2f946.MainActivity" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

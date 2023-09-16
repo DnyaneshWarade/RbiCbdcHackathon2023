@@ -1,20 +1,26 @@
-using CommunityToolkit.Maui.Views;
+using RbiCbdcHackathon2023.Database.Models;
 using RbiCbdcHackathon2023.ViewModels;
 
 namespace RbiCbdcHackathon2023.Pages.Popups;
 
-public partial class SendMoneyPopup : Popup
+public partial class SendMoneyPopup : ContentPage
 {
-	public SendMoneyPopup()
+    SendMoneyViewModel vm = new SendMoneyViewModel();
+    public SendMoneyPopup()
 	{
 		InitializeComponent();
-		var vm = new SendMoneyViewModel();
 		BindingContext = vm;
-        vm.ClosePopup += ExecuteClosePopup;
     }
 
-    private void ExecuteClosePopup(object sender, EventArgs e)
+    private void OnStepperValueChanged(object sender, EventArgs e)
     {
-        this.Close();
+        Stepper stepper = (Stepper)sender;
+        Denomination item = (Denomination)stepper.BindingContext;
+        if (item != null && item.MaxLimit < item.Quantity)
+        {
+            --item.Quantity;
+            return;
+        }
+        vm.OnStepperValueCahnged();
     }
 }

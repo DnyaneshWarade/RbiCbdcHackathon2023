@@ -40,7 +40,8 @@ namespace RbiCbdcHackathon2023.ViewModels
                     CommonFunctions.LoggedInMobileNo = MobileNo;
                     CommonFunctions.LoggedInMobilePin = Pin;
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
-                } else
+                }
+                else
                 {
                     Error = "Invalid mobile number or pin";
                 }
@@ -50,7 +51,6 @@ namespace RbiCbdcHackathon2023.ViewModels
             {
                 Error = "Enter valid mobile no. and pin";
             }
-
         }
 
         private bool validateInput()

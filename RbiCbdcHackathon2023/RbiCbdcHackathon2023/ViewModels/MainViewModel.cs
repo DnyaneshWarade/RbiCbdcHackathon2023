@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using RbiCbdcHackathon2023.Database;
 using RbiCbdcHackathon2023.Database.Models;
 using RbiCbdcHackathon2023.Helper;
+using RbiCbdcHackathon2023.Pages.Popups;
 using RbiCbdcHackathon2023.Services;
 using RbiCbdcHackathon2023.Services.PartialMethods;
 using System.Collections.ObjectModel;
@@ -77,6 +78,7 @@ namespace RbiCbdcHackathon2023.ViewModels
                 UnclearedBal = Balance = 0;
                 await SecureStorage.SetAsync("unclearedBal", UnclearedBal.ToString());
                 await SecureStorage.SetAsync("balance", Balance.ToString());
+                await SecureStorage.SetAsync("denominations", string.Empty);
             }
             catch(Exception ex)
             {
@@ -242,5 +244,11 @@ namespace RbiCbdcHackathon2023.ViewModels
                 Console.WriteLine(ex.Message);
             }
         }
+
+        [RelayCommand]
+        public async Task SendMoney()
+        {
+            await Shell.Current.GoToAsync(nameof(SendMoneyPopup));
+        } 
     }
 }
