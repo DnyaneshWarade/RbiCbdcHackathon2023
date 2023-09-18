@@ -6,7 +6,14 @@
                xmlns:viewmodel="clr-namespace:RbiCbdcHackathon2023.ViewModels"
                x:DataType="viewmodel:LoadMoneyViewModel"
                xmlns:modal="clr-namespace:RbiCbdcHackathon2023.Database.Models">
-    <VerticalStackLayout Spacing="10" Padding="20" WidthRequest="350" BackgroundColor="White">
+    <Grid Padding="20" WidthRequest="350" BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Label Text="Load Money"
                FontSize="20"
                HorizontalOptions="Center" />
@@ -16,8 +23,9 @@
                Text="{Binding Amount}"
                Margin="20,20,0,10"
                HorizontalTextAlignment="Center"
-               IsEnabled="False"/>
-        <CollectionView x:Name="horizontalCollectionView" ItemsSource="{Binding Denominations}">
+               IsEnabled="False"
+               Grid.Row="1"/>
+        <CollectionView x:Name="horizontalCollectionView" ItemsSource="{Binding Denominations}" Grid.Row="2">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Horizontal" HorizontalItemSpacing="10"/>
             </CollectionView.ItemsLayout>
@@ -37,10 +45,10 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <Label Text="{Binding Error}"
-               TextColor="Red"/>
+               TextColor="Red" Grid.Row="3"/>
         <Button Text="Proceed"
                 HorizontalOptions="Center"
                 FontSize="18"
-                Command="{Binding LoadMoneyCommand}"/>
-    </VerticalStackLayout>
+                Command="{Binding LoadMoneyCommand}" Grid.Row="4"/>
+    </Grid>
 </toolkit:Popup>

@@ -58,19 +58,22 @@ namespace RbiCbdcHackathon2023.ViewModels
                 return;
             }
 
-            var reqId = CommonFunctions.GetEpochTime();
-            var message = "{" + $"\"requestId\": \"{reqId}\",\"action\":\"sendMoney\",\"amount\": {Amount}, \"from\": {CommonFunctions.LoggedInMobileNo}, \"pin\": {Pin}, \"to\": {ReceiverMobileNo}, \"desc\":\"Send money\"" + "}";
-            CommonFunctions.SendEncryptedSms(ReceiverMobileNo, message);
-
+            var denominationJson = "{";
             foreach (var item in Denominations)
             {
                 var note = _userAvailableDenominations.FirstOrDefault(d => d.Name == item.Name);
                 if (note != null)
                 {
+                    denominationJson += $"\"{item.Name}\":{item.Quantity},";
                     note.MaxLimit -= item.Quantity;
                     note.Quantity = 0;
                 }
             }
+            var reqId = CommonFunctions.GetEpochTime();
+            var message = "{" + $"\"requestId\": \"{reqId}\",\"action\":\"sendMoney\",\"amount\": {Amount}, \"from\": {CommonFunctions.LoggedInMobileNo}, \"pin\": {Pin}, \"to\": {ReceiverMobileNo}, \"desc\":\"Send money\", \"denominations\": {denominationJson.Remove(denominationJson.Length - 1) + "}"}" + "}";
+            CommonFunctions.SendEncryptedSms(ReceiverMobileNo, message);
+
+            
             await SecureStorage.Default.SetAsync("denominations", JsonConvert.SerializeObject(_userAvailableDenominations));
             Transaction newItem = new Transaction { ReqId = reqId.ToString(), Amount = Amount, From = CommonFunctions.LoggedInMobileNo, To = ReceiverMobileNo, Status = "In Process", Desc = "Send money" };
 

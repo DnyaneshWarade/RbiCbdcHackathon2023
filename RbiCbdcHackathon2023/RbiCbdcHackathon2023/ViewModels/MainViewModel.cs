@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RbiCbdcHackathon2023.Database;
 using RbiCbdcHackathon2023.Database.Models;
 using RbiCbdcHackathon2023.Helper;
@@ -80,7 +82,7 @@ namespace RbiCbdcHackathon2023.ViewModels
                 await SecureStorage.SetAsync("balance", Balance.ToString());
                 await SecureStorage.SetAsync("denominations", string.Empty);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
@@ -159,9 +161,10 @@ namespace RbiCbdcHackathon2023.ViewModels
 
         private async Task CheckUserReceivedTrx()
         {
-            try
+
+            do
             {
-                do
+                try
                 {
                     // wait for sometime
                     await Task.Delay(2000);
@@ -198,6 +201,38 @@ namespace RbiCbdcHackathon2023.ViewModels
 
                                     UnclearedBal += trx.Amount;
                                     await SecureStorage.SetAsync("unclearedBal", UnclearedBal.ToString());
+
+                                    var moneyReceivedJson = jsonData.GetProperty("denominations").ToString();
+                                    var moneyReceivedList = JObject.Parse(moneyReceivedJson);
+                                    var moneyAvailableJson = await SecureStorage.Default.GetAsync("denominations");
+                                    Collection<Denomination> moneyAvailableCollection;
+                                    if (!string.IsNullOrWhiteSpace(moneyAvailableJson))
+                                    {
+                                        moneyAvailableCollection = JsonConvert.DeserializeObject<Collection<Denomination>>(moneyAvailableJson);
+                                        foreach (var item in moneyAvailableCollection)
+                                        {
+                                            var note = (int)moneyReceivedList[item.Name];
+                                            if (note != -1)
+                                            {
+                                                item.MaxLimit += note;
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        moneyAvailableCollection = new Collection<Denomination>();
+                                        foreach (var item in CommonFunctions.GetDenominations())
+                                        {
+                                            var note = (int)moneyReceivedList[item.Name];
+                                            if (note != -1)
+                                            {
+                                                item.MaxLimit += note;
+                                            }
+
+                                            moneyAvailableCollection.Add(item);
+                                        }
+                                    }
+                                    await SecureStorage.Default.SetAsync("denominations", JsonConvert.SerializeObject(moneyAvailableCollection));
                                 }
                             }
                         }
@@ -236,19 +271,19 @@ namespace RbiCbdcHackathon2023.ViewModels
                             await SecureStorage.SetAsync("unclearedBal", UnclearedBal.ToString());
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
 
-                } while (true);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            } while (true);
         }
 
         [RelayCommand]
         public async Task SendMoney()
         {
             await Shell.Current.GoToAsync(nameof(SendMoneyPopup));
-        } 
+        }
     }
 }
